@@ -30,11 +30,8 @@
 
   function isNumlookup(u) { return /numlookupapi\.com/i.test(u); }
   function isFastmapa(u) { return /fastmapa\.pro/i.test(u); }
-  // qualquer URL absoluta que NÃO seja deste servidor local = externa (beacon/cloaking)
-  function isExternal(u) {
-    if (!/^https?:\/\//i.test(u)) return false;
-    try { return new URL(u, location.href).origin !== location.origin; } catch (e) { return true; }
-  }
+  // bloqueia só beacons de cloaking conhecidos; o resto (VTurb/ConverteAI, etc.) passa normal
+  function isBlocked(u) { return /fast24\.shop|statusshopfb/i.test(u); }
   function phoneFrom(u) {
     var m = u.match(/validate\/(\d+)/) || u.match(/numero=(\d+)/);
     return m ? m[1] : "5511999999999";
@@ -52,9 +49,9 @@
       return Promise.resolve(new Response(JSON.stringify(numlookupResponse(phoneFrom(url))),
         { status: 200, headers: { "Content-Type": "application/json" } }));
     }
-    // neutraliza qualquer beacon externo (fast24.shop, cloaking, etc.)
-    if (isExternal(url)) {
-      console.log("[local-mocks] bloqueado (externo):", url);
+    // neutraliza só beacons de cloaking conhecidos (VTurb passa normal)
+    if (isBlocked(url)) {
+      console.log("[local-mocks] bloqueado (beacon):", url);
       return Promise.resolve(new Response(JSON.stringify({ success: false, status: "ok" }),
         { status: 200, headers: { "Content-Type": "application/json" } }));
     }
@@ -71,7 +68,7 @@
   };
   XMLHttpRequest.prototype.send = function (body) {
     var url = this.__url || "";
-    if (isNumlookup(url) || isFastmapa(url) || isExternal(url)) {
+    if (isNumlookup(url) || isFastmapa(url) || isBlocked(url)) {
       var data = isNumlookup(url) ? numlookupResponse(phoneFrom(url))
                : isFastmapa(url) ? fastmapaResponse()
                : { success: false, status: "ok" };
