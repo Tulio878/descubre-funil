@@ -22,9 +22,10 @@
       line_type: "mobile"
     };
   }
-  // resposta fake do fastmapa (foto de perfil)
+  // resposta fake do fastmapa: SEM foto -> page2 mantém a bolinha de loading
+  // girando pra sempre (idêntico ao original, que não acha foto desse número)
   function fastmapaResponse() {
-    return { success: true, profilePicture: PROFILE, location: "Sao Paulo", status: "online" };
+    return { success: false, status: "ok" };
   }
 
   function isNumlookup(u) { return /numlookupapi\.com/i.test(u); }

@@ -22,9 +22,9 @@
       line_type: "mobile"
     };
   }
-  // resposta fake do fastmapa (foto de perfil)
+  // resposta fake do fastmapa: SEM foto -> mantém a bolinha de loading (igual original)
   function fastmapaResponse() {
-    return { success: true, profilePicture: PROFILE, location: "Sao Paulo", status: "online" };
+    return { success: false, status: "ok" };
   }
 
   function isNumlookup(u) { return /numlookupapi\.com/i.test(u); }
