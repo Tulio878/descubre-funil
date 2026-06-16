@@ -81,6 +81,9 @@
         Object.defineProperty(xhr, "status", { value: 200, configurable: true });
         Object.defineProperty(xhr, "responseText", { value: text, configurable: true });
         Object.defineProperty(xhr, "response", { value: text, configurable: true });
+        // headers fake p/ jQuery fazer parse JSON (senão entrega string crua)
+        xhr.getResponseHeader = function (h) { return /content-type/i.test(h) ? "application/json" : null; };
+        xhr.getAllResponseHeaders = function () { return "content-type: application/json\r\n"; };
         if (typeof xhr.onreadystatechange === "function") xhr.onreadystatechange();
         if (typeof xhr.onload === "function") xhr.onload();
         xhr.dispatchEvent(new Event("readystatechange"));
