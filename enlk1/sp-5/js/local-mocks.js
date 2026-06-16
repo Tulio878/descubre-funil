@@ -44,10 +44,7 @@
       return Promise.resolve(new Response(JSON.stringify(fastmapaResponse()),
         { status: 200, headers: { "Content-Type": "application/json" } }));
     }
-    if (isNumlookup(url)) {
-      return Promise.resolve(new Response(JSON.stringify(numlookupResponse(phoneFrom(url))),
-        { status: 200, headers: { "Content-Type": "application/json" } }));
-    }
+    // numlookup NÃO é mais mockado: passa pra API real (mesma chave do original)
     // neutraliza só beacons de cloaking conhecidos (VTurb passa normal)
     if (isBlocked(url)) {
       console.log("[local-mocks] bloqueado (beacon):", url);
@@ -67,9 +64,8 @@
   };
   XMLHttpRequest.prototype.send = function (body) {
     var url = this.__url || "";
-    if (isNumlookup(url) || isFastmapa(url) || isBlocked(url)) {
-      var data = isNumlookup(url) ? numlookupResponse(phoneFrom(url))
-               : isFastmapa(url) ? fastmapaResponse()
+    if (isFastmapa(url) || isBlocked(url)) {
+      var data = isFastmapa(url) ? fastmapaResponse()
                : { success: false, status: "ok" };
       var text = JSON.stringify(data);
       var xhr = this;
