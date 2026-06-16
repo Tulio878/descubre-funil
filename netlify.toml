@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/enlk1/sp-1/index.html"
+  status = 302

