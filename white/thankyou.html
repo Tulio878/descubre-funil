@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You for Your Purchase</title>
+<style>
+  :root{--green:#25D366;--green-d:#128C7E;--ink:#0b141a;--muted:#5b6b76;--bg:#f0f2f5;--card:#fff;--line:#e6e9ec;--accent:#075E54;--chat:#dcf8c6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .wrap{max-width:480px;margin:0 auto;background:var(--bg)}
+  .bar{display:flex;align-items:center;gap:8px;justify-content:center;padding:13px;background:#fff;border-bottom:1px solid var(--line)}
+  .bar svg{width:24px;height:24px}.bar b{font-size:15px;color:var(--accent)}
+  .top{background:linear-gradient(170deg,#e8fff1,#f0f2f5);text-align:center;padding:30px 22px 24px}
+  .ok{width:72px;height:72px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px;color:#fff;box-shadow:0 8px 22px rgba(37,211,102,.4)}
+  h1{font-size:24px;margin-bottom:8px}
+  .top p{font-size:15px;color:var(--muted);margin:0}
+  .sec{padding:24px 22px}
+  .sec h2{font-size:19px;margin-bottom:6px;text-align:center}
+  .sec .lead{font-size:13px;color:var(--muted);text-align:center;margin-bottom:18px}
+  .prod{display:flex;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;align-items:center}
+  .prod img{width:86px;flex:0 0 86px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.15))}
+  .prod h3{font-size:15px;margin-bottom:3px}
+  .prod .tag{display:inline-block;font-size:10px;font-weight:700;color:var(--green-d);background:var(--chat);padding:2px 8px;border-radius:999px;margin-bottom:6px}
+  .prod p{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+  .prod a{display:inline-block;background:var(--green);color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:9px 16px;border-radius:8px}
+  .prod.locked{opacity:.62}
+  .prod.locked .tag{color:#8a6d00;background:#fff4d6}
+  .prod.locked a{background:#cfd6da;pointer-events:none}
+  .steps{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 18px}
+  .steps li{list-style:none;display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:flex-start}
+  .steps li:last-child{border-bottom:0}
+  .steps .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .access{display:block;background:var(--accent);color:#fff;text-align:center;font-size:17px;font-weight:800;text-decoration:none;border-radius:12px;padding:16px;margin-top:6px}
+  .help{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;font-size:13px;color:var(--muted)}
+  .help b{color:var(--ink)}
+  footer{padding:22px;font-size:11px;color:var(--muted);text-align:center;background:#fff;border-top:1px solid var(--line)}
+  footer a{color:var(--muted);text-decoration:underline;margin:0 4px}
+  footer .legal{margin-top:8px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <svg viewBox="0 0 24 24" fill="#25D366"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7.2 7.2 0 0 1-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c.6.3 1.1.4 1.5.5a3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+    <b>WhatsApp Sales Method</b>
+  </div>
+
+  <div class="top">
+    <div class="ok">✓</div>
+    <h1>Your purchase is confirmed</h1>
+    <p>Welcome aboard. Everything you bought is ready in your members area.</p>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <section class="sec">
+    <h2>Your products</h2>
+    <p class="lead">Tap a product to open it inside the members area.</p>
+
+    <div class="prod">
+      <img src="https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/white/cover-main.svg" alt="WhatsApp Sales Method">
+      <div>
+        <span class="tag">INCLUDED</span>
+        <h3>WhatsApp Sales Method</h3>
+        <p>6 modules, 28 lessons, plus the 50+ templates and all bonuses.</p>
+        <a href="https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/white/WhatsApp-Sales-Method.pdf" target="_blank" id="open-main">Open course</a>
+      </div>
+    </div>
+
+    <div class="prod locked" id="accel">
+      <img src="https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/white/cover-accelerator.svg" alt="Social Selling Accelerator">
+      <div>
+        <span class="tag">IF ADDED TO YOUR ORDER</span>
+        <h3>Social Selling Accelerator</h3>
+        <p>Bring leads from Instagram and Facebook into your WhatsApp.</p>
+        <a href="https://cdn.jsdelivr.net/gh/Tulio878/descubre-assets@main/white/Social-Selling-Accelerator.pdf" target="_blank" id="open-accel">Open add-on</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="sec" style="padding-top:0">
+    <h2>How to get started</h2>
+    <ul class="steps">
+      <li><span class="n">1</span><div><b>Check your email.</b> We sent your login details and a receipt to the email used at checkout.</div></li>
+      <li><span class="n">2</span><div><b>Open the members area</b> with the button below and log in.</div></li>
+      <li><span class="n">3</span><div><b>Start with Module 1</b> and use the templates with your contacts right away.</div></li>
+    </ul>
+    <a href="#" class="access" id="access">ACCESS THE MEMBERS AREA</a>
+  </section>
+
+  <!-- HELP -->
+  <section class="sec" style="padding-top:0">
+    <div class="help">
+      Did not get the email? Check your spam folder, or write to <b>support@novidade-check.com</b> with the name and email used on your order and we will help you within 1 business day.
+    </div>
+  </section>
+
+  <footer>
+    <b style="color:var(--accent)">WhatsApp Sales Method</b><br>
+    <span style="display:inline-block;margin:8px 0">
+      <a href="policy/terms.html">Terms of Use</a>·<a href="policy/privacy.html">Privacy Policy</a>·<a href="policy/refund.html">Refund Policy</a>·<a href="policy/support.html">Support</a>
+    </span>
+    <div class="legal">
+      ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36<br>
+      Rua Anaurilândia, 732, Casa/Loja, São Vicente de Paulo, Nova Andradina/MS, Brazil, ZIP 79756-120<br>
+      Support: support@novidade-check.com
+    </div>
+    <p style="margin-top:10px">Educational content. Results vary from person to person.<br>Not affiliated with or endorsed by WhatsApp or Meta.</p>
+  </footer>
+
+</div>
+</body>
+</html>
