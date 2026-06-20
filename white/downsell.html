@@ -46,6 +46,19 @@
   footer a{color:var(--muted);text-decoration:underline;margin:0 4px}
   footer .legal{margin-top:8px;line-height:1.7}
   .divider{height:1px;background:var(--line);margin:0 22px}
+
+  /* ==== POLICY MODALS (self-contained) ==== */
+  .pm{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:9999;padding:18px;overflow-y:auto}
+  .pm:target{display:block}
+  .pm .box{background:#fff;max-width:560px;margin:24px auto;border-radius:14px;padding:26px 22px;position:relative;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .pm .x{position:absolute;top:12px;right:16px;text-decoration:none;color:#9aa6a2;font-size:26px;font-weight:700;line-height:1}
+  .pm h3{font-size:19px;color:#075E54;margin:0 0 4px}
+  .pm .u{font-size:11px;color:#5b6b66;margin-bottom:14px}
+  .pm h4{font-size:13px;color:#128C7E;margin:14px 0 4px}
+  .pm p{font-size:13px;color:#333;line-height:1.6;margin:0 0 8px}
+  .pm ul{margin:4px 0 8px 18px}.pm li{font-size:13px;color:#333;margin-bottom:5px}
+  .pm .lg{font-size:11px;color:#5b6b66;line-height:1.6;border-top:1px solid #e6e9ec;margin-top:14px;padding-top:12px}
+  .pm a.link{color:#128C7E}
 </style>
 </head>
 <body>
@@ -99,7 +112,7 @@
   <footer>
     <b style="color:var(--accent)">WhatsApp Sales Method</b><br>
     <span style="display:inline-block;margin:8px 0">
-      <a href="policy/terms.html">Terms of Use</a>·<a href="policy/privacy.html">Privacy Policy</a>·<a href="policy/refund.html">Refund Policy</a>·<a href="policy/support.html">Support</a>
+      <a href="#policy-terms">Terms of Use</a>·<a href="#policy-privacy">Privacy Policy</a>·<a href="#policy-refund">Refund Policy</a>·<a href="#policy-support">Support</a>
     </span>
     <div class="legal">
       ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36<br>
@@ -110,5 +123,44 @@
   </footer>
 
 </div>
+
+<div class="pm" id="policy-terms"><div class="box"><a class="x" href="#">&times;</a>
+  <h3>Terms of Use</h3><div class="u">Last updated: January 2026</div>
+  <p>By buying and using the WhatsApp Sales Method (the "Product"), you agree to these terms.</p>
+  <h4>What you are buying</h4><p>An online educational training that teaches communication and sales skills for using WhatsApp. You get access to lessons, written material and templates in a members area.</p>
+  <h4>License</h4><p>You get a personal, non-transferable license for your own use. You may not copy, resell, share your login, or redistribute any part of it.</p>
+  <h4>No guarantee of results</h4><p>The Product shares methods and examples. It does not promise any specific income or result. Outcomes depend on your effort, offer and market.</p>
+  <h4>Not affiliated</h4><p>This Product is independent and is not affiliated with, endorsed by or sponsored by WhatsApp LLC or Meta Platforms, Inc.</p>
+  <h4>Acceptable use</h4><p>Use what you learn legally and ethically, and respect WhatsApp's terms of service, including rules on consent and spam.</p>
+  <h4>Payment, access and refunds</h4><p>Payment is processed by our checkout provider. Access is delivered by email after payment is approved. Refunds follow our <a class="link" href="#policy-refund">Refund Policy</a>.</p>
+  <div class="lg">ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36 · Rua Anaurilândia, 732, Casa/Loja, São Vicente de Paulo, Nova Andradina/MS, Brazil, ZIP 79756-120<br>Support: support@novidade-check.com</div>
+</div></div>
+
+<div class="pm" id="policy-privacy"><div class="box"><a class="x" href="#">&times;</a>
+  <h3>Privacy Policy</h3><div class="u">Last updated: January 2026 · LGPD</div>
+  <p>This policy explains what we collect when you visit our pages or buy the Product, and how we use it.</p>
+  <h4>Data we collect</h4><ul><li>Name and email, at checkout, to deliver access and send your receipt.</li><li>Payment data, handled directly by our payment provider. We do not store your full card number.</li><li>Basic usage analytics to improve our pages.</li></ul>
+  <h4>Purposes and legal basis</h4><p>To deliver the product, provide support, handle billing and send transactional messages. Legal basis: performance of contract (LGPD art. 7, V) and consent where applicable.</p>
+  <h4>Sharing</h4><p>Only with providers that make the service work (payment processor, email, hosting). We do not sell your personal data.</p>
+  <h4>Your rights</h4><p>You can ask us to access, correct or delete your data. Contact: support@novidade-check.com</p>
+  <div class="lg">ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36 · Rua Anaurilândia, 732, Casa/Loja, São Vicente de Paulo, Nova Andradina/MS, Brazil, ZIP 79756-120</div>
+</div></div>
+
+<div class="pm" id="policy-refund"><div class="box"><a class="x" href="#">&times;</a>
+  <h3>Refund Policy</h3><div class="u">Last updated: January 2026</div>
+  <h4>7-day guarantee</h4><p>Every purchase comes with a 7-day money-back guarantee. If you are not happy for any reason, you can request a full refund within 7 days of your purchase.</p>
+  <h4>How to request</h4><ul><li>Email support@novidade-check.com with the subject "Refund".</li><li>Include the name and email used at checkout.</li><li>Approved refunds are returned to your original payment method within a few business days.</li></ul>
+  <h4>After 7 days</h4><p>Requests made after the 7-day window may not be eligible, but you can still contact support and we will do our best to help.</p>
+  <div class="lg">ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36 · Rua Anaurilândia, 732, Casa/Loja, São Vicente de Paulo, Nova Andradina/MS, Brazil, ZIP 79756-120</div>
+</div></div>
+
+<div class="pm" id="policy-support"><div class="box"><a class="x" href="#">&times;</a>
+  <h3>Support</h3><div class="u">We are here to help</div>
+  <h4>Contact</h4><p><b>Email:</b> support@novidade-check.com<br><b>Response time:</b> up to 1 business day (Mon to Fri).</p>
+  <h4>Getting your access</h4><p>Access is delivered in the members area after your purchase is confirmed. Login details are sent to the email used at checkout. Did not get it? Check spam, then email us.</p>
+  <h4>Refunds</h4><p>7-day money-back guarantee. See our <a class="link" href="#policy-refund">Refund Policy</a>.</p>
+  <div class="lg">ALN EMPREENDIMENTOS LTDA · CNPJ 52.283.556/0001-36 · Rua Anaurilândia, 732, Casa/Loja, São Vicente de Paulo, Nova Andradina/MS, Brazil, ZIP 79756-120</div>
+</div></div>
+
 </body>
 </html>
