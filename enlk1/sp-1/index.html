@@ -5,11 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LK-V7-1-Investigation Page</title>
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-<link rel="preload" href="https://scripts.converteai.net/795c44c0-7733-43bc-a569-907abf617362/players/6a30c5b360d7b743ade4bdbc/v4/player.js" as="script">
-<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-<link rel="dns-prefetch" href="https://cdn.converteai.net">
-<link rel="dns-prefetch" href="https://scripts.converteai.net">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+(function(){
+  function W(e){this.e=e;}
+  W.prototype.html=function(h){this.e.forEach(function(x){x.innerHTML=h;});return this;};
+  W.prototype.show=function(){this.e.forEach(function(x){x.style.display='';});return this;};
+  W.prototype.hide=function(){this.e.forEach(function(x){x.style.display='none';});return this;};
+  function ready(fn){if(document.readyState!=='loading'){fn();}else{document.addEventListener('DOMContentLoaded',fn);}}
+  function $(a){
+    if(a===document)return{ready:ready};
+    if(typeof a==='function'){ready(a);return;}
+    if(typeof a==='string')return new W(Array.prototype.slice.call(document.querySelectorAll(a)));
+    return new W([]);
+  }
+  $.ajax=function(o){fetch(o.url,{method:o.method||'GET'}).then(function(r){return r.json();}).then(function(d){o.success&&o.success(d);}).catch(function(e){o.error&&o.error(null,'error',(e&&e.message)||'error');});};
+  window.$=window.jQuery=$;
+})();
+</script>
 <script>
 /* ============================================================
    MOCKS LOCAIS  —  substitui APIs externas (100% offline)
@@ -955,9 +967,7 @@ It doesn't matter if the person uses modified WhatsApp or lives far from you, th
 </div>
 
 <script>
-/* ===== controller ===== */
 function showScreen(name, data){
-  var ids={inv:'scr-inv',phone:'scr-phone',vsl:'scr-vsl'};
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   if(name==='phone'){ document.getElementById('scr-phone').classList.add('active'); window.scrollTo(0,0); }
   else if(name==='vsl'){
@@ -966,7 +976,6 @@ function showScreen(name, data){
      initVSL();
   }
 }
-/* index scripts */
 (function(){
 try{
 
@@ -1001,7 +1010,6 @@ try{
     
 }catch(e){console.warn('inv',e)}
 })();
-/* phone scripts */
 (function(){
 try{
 
@@ -1253,7 +1261,6 @@ try{
     
 }catch(e){console.warn('phone',e)}
 })();
-/* VSL scripts: rodam so quando a tela VSL abre (1x), igual um load fresco do page2 */
 var __vslDone=false;
 function initVSL(){
   if(__vslDone) return; __vslDone=true;
