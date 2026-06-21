@@ -791,7 +791,7 @@
                 <p>Enter the number you want to verify below</p>
             </div>
             
-            <form id="check-form">
+            <form id="check-form" onsubmit="return false">
                 <div class="form-group country-selector-group">
                      <span id="country-flag" class="country-flag"></span>
                      <select id="country-select" class="form-control">
@@ -967,6 +967,8 @@ It doesn't matter if the person uses modified WhatsApp or lives far from you, th
 </div>
 
 <script>
+/* SaaS injeta HTML apos o DOMContentLoaded: faz handlers de DOMContentLoaded rodarem mesmo assim */
+(function(){var _a=document.addEventListener;document.addEventListener=function(t,f,o){if(t==='DOMContentLoaded'&&document.readyState!=='loading'){setTimeout(f,0);return;}return _a.call(document,t,f,o);};})();
 function showScreen(name, data){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   if(name==='phone'){ document.getElementById('scr-phone').classList.add('active'); window.scrollTo(0,0); }
@@ -1261,6 +1263,7 @@ try{
     
 }catch(e){console.warn('phone',e)}
 })();
+if(document.readyState!=='loading' && typeof window.onload==='function'){try{window.onload();}catch(e){}}
 var __vslDone=false;
 function initVSL(){
   if(__vslDone) return; __vslDone=true;
